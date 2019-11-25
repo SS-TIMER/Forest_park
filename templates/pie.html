@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>park</title>
+    <script type="text/javascript" src="http://echarts.baidu.com/dist/echarts.js"></script>
+</head>
+<style>
+    html, body, .content {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        background-color: #ccc;
+    }
+
+    .content {
+        padding: 40px;
+    }
+
+    .header {
+        height: 10%;
+        width: 100%;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 60px;
+        text-align: center;
+    }
+
+    .body {
+        height: 100%;
+        width: 100%;
+        text-align: center;
+    }
+
+    .chartBox {
+        width: 1200px;
+        height: 800px;
+        margin-bottom: 40px;
+    }
+
+    .chartBox3 {
+        width: 1200px;
+        height: 800px;
+        margin-bottom: 40px;
+    }
+</style>
+<body>
+<h1>狗才</h1>
+<div class="content">
+    <h3>Part 1: 分析山东省所有的公园面积，通过柱状图展示</h3>
+    <div class="header">
+        <div class="chartBox3" id="chartBox3"></div>
+    </div>
+</div>
+</body>
+<script>
+    var chartObj3 = echarts.init(document.getElementById('chartBox3'));
+
+    {#var forest_area_five_4 = {value:{{ res4.area_ha }}, name: "{{ res4.Province }}"};#}
+    {#var forest_area_five_5 = {value:{{ res5.area_ha }}, name: "{{ res5.Province }}"};#}
+    {#var forest_area_five_6 = {value:{{ res6.area_ha }}, name: "{{ res6.Province }}"};#}
+    {#var forest_area_five_7 = {value:{{ res7.area_ha }}, name: "{{ res7.Province }}"};#}
+    {#var forest_area_five_8 = {value:{{ res8.area_ha }}, name: "{{ res8.Province }}"};#}
+
+    {#console.log(forest_area_five_4, forest_area_five_5, forest_area_five_6, forest_area_five_7, forest_area_five_8);#}
+
+    option3 = {
+        backgroundColor: '#2c343c',
+
+        title: {
+            text: 'Customized Pie',
+            left: 'center',
+            top: 20,
+            textStyle: {
+                color: '#ccc'
+            }
+        },
+
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+
+        visualMap: {
+            show: false,
+            min: 80,
+            max: 600,
+            inRange: {
+                colorLightness: [0, 1]
+            }
+        },
+        series: [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: '55%',
+                center: ['50%', '50%'],
+                data: [
+                    {value:{{ res4.area_ha }}, name: "{{ res4.Province }}"}
+                ].sort(function (a, b) {
+                    return a.value - b.value;
+                }),
+                roseType: 'radius',
+                label: {
+                    normal: {
+                        textStyle: {
+                            color: 'rgba(255, 255, 255, 0.3)'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.3)'
+                        },
+                        smooth: 0.2,
+                        length: 10,
+                        length2: 20
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#c23531',
+                        shadowBlur: 200,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                },
+
+                animationType: 'scale',
+                animationEasing: 'elasticOut',
+                animationDelay: function (idx) {
+                    return Math.random() * 200;
+                }
+            }
+        ]
+    };
+
+    chartObj3.setOption(option3)
+</script>
+
+</html>
